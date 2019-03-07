@@ -246,7 +246,7 @@ func PgConvertType(col *PgColumn, typeCfg *PgTypeMapConfig) string {
 	typ := cfg["default"].NotNullGoType
 	for _, v := range cfg {
 
-		typ := strings.Split(col.DataType "(")[0]
+		typ := strings.Split(col.DataType, "(")[0]
 		fmt.Printf("Testing type [%s]\n", typ)
 
 		if contains(typ, v.DBTypes) {
