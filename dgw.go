@@ -45,7 +45,8 @@ const pgLoadColumnDef = `
 SELECT
     a.attnum AS field_ordinal,
     a.attname AS column_name,
-    format_type(a.atttypid, a.atttypmod) AS data_type,
+    --format_type(a.atttypid, a.atttypmod) AS data_type,
+    a.atttypid AS data_type,
     a.attnotnull AS not_null,
     COALESCE(pg_get_expr(ad.adbin, ad.adrelid), '') AS default_value,
     COALESCE(ct.contype = 'p', false) AS  is_primary_key,
