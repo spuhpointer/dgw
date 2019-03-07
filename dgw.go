@@ -45,8 +45,7 @@ const pgLoadColumnDef = `
 SELECT
     a.attnum AS field_ordinal,
     a.attname AS column_name,
-    --format_type(a.atttypid, a.atttypmod) AS data_type,
-    a.atttypid AS data_type,
+    format_type(a.atttypid, a.atttypmod) AS data_type,
     a.attnotnull AS not_null,
     COALESCE(pg_get_expr(ad.adbin, ad.adrelid), '') AS default_value,
     COALESCE(ct.contype = 'p', false) AS  is_primary_key,
@@ -246,6 +245,9 @@ func PgConvertType(col *PgColumn, typeCfg *PgTypeMapConfig) string {
 	cfg := map[string]TypeMap(*typeCfg)
 	typ := cfg["default"].NotNullGoType
 	for _, v := range cfg {
+
+		fmt.Printf("Testing type [%s]\n", col.DataType)
+
 		if contains(col.DataType, v.DBTypes) {
 			if col.NotNull {
 				return v.NotNullGoType
