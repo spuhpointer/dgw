@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"sort"
 	"text/template"
+	"strings"
 
 	"github.com/BurntSushi/toml"
 	"github.com/achiku/varfmt"
